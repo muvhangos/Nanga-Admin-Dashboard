@@ -3,9 +3,10 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>Nanga Primary School Dashboard</title>
+<title>Nanga Primary School System</title>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
@@ -22,7 +23,55 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 }
 
 body{
-    background:#f1f4f9;
+    background:#eef2f7;
+}
+
+/* ================= LOGIN ================= */
+
+.login-page{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-box{
+    background:white;
+    padding:30px;
+    width:350px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.login-box h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#1565c0;
+}
+
+.login-box input{
+    width:100%;
+    padding:14px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:12px;
+}
+
+.login-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#1565c0;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+/* ================= APP ================= */
+
+.app{
+    display:none;
 }
 
 /* ================= SIDEBAR ================= */
@@ -36,42 +85,36 @@ body{
     left:0;
     bottom:0;
     padding:20px;
-    overflow:auto;
 }
 
-.school-logo{
+.logo{
     text-align:center;
     margin-bottom:30px;
 }
 
-.school-logo i{
+.logo i{
     font-size:55px;
     margin-bottom:10px;
 }
 
-.school-logo h2{
+.logo h2{
     font-size:20px;
 }
 
 .menu button{
     width:100%;
-    border:none;
-    background:none;
-    color:white;
     padding:15px;
+    border:none;
     margin-bottom:10px;
     border-radius:12px;
+    background:none;
+    color:white;
     text-align:left;
     cursor:pointer;
-    font-size:15px;
     transition:0.3s;
 }
 
 .menu button:hover{
-    background:rgba(255,255,255,0.2);
-}
-
-.menu button.active{
     background:rgba(255,255,255,0.2);
 }
 
@@ -95,18 +138,11 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:20px;
     box-shadow:0 3px 10px rgba(0,0,0,0.08);
+    margin-bottom:20px;
 }
 
-.admin{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.admin i{
-    font-size:35px;
+.topbar h1{
     color:#1565c0;
 }
 
@@ -138,18 +174,14 @@ body{
     margin-bottom:15px;
 }
 
-.card h3{
-    margin-bottom:10px;
-}
-
 /* ================= TABLE ================= */
 
 .table-box{
     background:white;
     padding:20px;
     border-radius:20px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.08);
     margin-bottom:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
     overflow:auto;
 }
 
@@ -170,18 +202,14 @@ table td{
     border-bottom:1px solid #eee;
 }
 
-/* ================= FORM ================= */
+/* ================= FORMS ================= */
 
 .form-box{
     background:white;
     padding:20px;
     border-radius:20px;
+    margin-bottom:20px;
     box-shadow:0 3px 10px rgba(0,0,0,0.08);
-    margin-bottom:20px;
-}
-
-.form-box h2{
-    margin-bottom:20px;
 }
 
 .form-group{
@@ -190,29 +218,29 @@ table td{
 
 .form-group label{
     display:block;
-    margin-bottom:5px;
+    margin-bottom:6px;
 }
 
 .form-group input,
 .form-group select{
     width:100%;
     padding:12px;
-    border:1px solid #ccc;
     border-radius:10px;
+    border:1px solid #ccc;
 }
 
 .submit-btn{
     width:100%;
     padding:14px;
-    background:#1565c0;
-    color:white;
     border:none;
     border-radius:12px;
+    background:#1565c0;
+    color:white;
     cursor:pointer;
     font-size:16px;
 }
 
-/* ================= BUTTONS ================= */
+/* ================= ACTION BUTTONS ================= */
 
 .action-btn{
     border:none;
@@ -252,17 +280,16 @@ table td{
 @media(max-width:768px){
 
 .sidebar{
-    width:100%;
     position:relative;
+    width:100%;
 }
 
 .main{
     margin-left:0;
 }
 
-.topbar{
-    flex-direction:column;
-    gap:10px;
+.cards{
+    grid-template-columns:1fr;
 }
 
 }
@@ -273,67 +300,27 @@ table td{
 
 <body>
 
-<!-- ================= SIDEBAR ================= -->
+<!-- ================= LOGIN ================= -->
 
-<div class="sidebar">
+<div class="login-page"
+id="loginPage">
 
-    <div class="school-logo">
-
-        <i class="fas fa-school"></i>
+    <div class="login-box">
 
         <h2>Nanga Primary School</h2>
 
-        <p>Admin Dashboard</p>
+        <input type="text"
+        id="username"
+        placeholder="Username">
 
-    </div>
+        <input type="password"
+        id="password"
+        placeholder="Password">
 
-    <div class="menu">
+        <button class="login-btn"
+        onclick="login()">
 
-        <button class="active"
-        onclick="openSection('Dashboard')">
-
-            <i class="fas fa-home"></i>
-            Dashboard
-
-        </button>
-
-        <button
-        onclick="openSection('Students')">
-
-            <i class="fas fa-user-graduate"></i>
-            Students
-
-        </button>
-
-        <button
-        onclick="openSection('Teachers')">
-
-            <i class="fas fa-chalkboard-teacher"></i>
-            Teachers
-
-        </button>
-
-        <button
-        onclick="openSection('Attendance')">
-
-            <i class="fas fa-calendar-check"></i>
-            Attendance
-
-        </button>
-
-        <button
-        onclick="openSection('Finance')">
-
-            <i class="fas fa-money-bill-wave"></i>
-            Finance
-
-        </button>
-
-        <button
-        onclick="openSection('Settings')">
-
-            <i class="fas fa-cog"></i>
-            Settings
+            Login
 
         </button>
 
@@ -341,341 +328,294 @@ table td{
 
 </div>
 
-<!-- ================= MAIN ================= -->
+<!-- ================= APP ================= -->
 
-<div class="main">
+<div class="app"
+id="app">
 
-    <!-- ================= TOPBAR ================= -->
+    <!-- ================= SIDEBAR ================= -->
 
-    <div class="topbar">
+    <div class="sidebar">
 
-        <h1 id="pageTitle">
-            Dashboard
-        </h1>
+        <div class="logo">
 
-        <div class="admin">
+            <i class="fas fa-school"></i>
 
-            <i class="fas fa-user-circle"></i>
+            <h2>Nanga Primary School</h2>
+
+        </div>
+
+        <div class="menu">
+
+            <button onclick="openSection('Dashboard')">
+                <i class="fas fa-home"></i>
+                Dashboard
+            </button>
+
+            <button onclick="openSection('Students')">
+                <i class="fas fa-user-graduate"></i>
+                Students
+            </button>
+
+            <button onclick="openSection('Teachers')">
+                <i class="fas fa-chalkboard-teacher"></i>
+                Teachers
+            </button>
+
+            <button onclick="openSection('Attendance')">
+                <i class="fas fa-calendar-check"></i>
+                Attendance
+            </button>
+
+            <button onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="main">
+
+        <!-- ================= TOPBAR ================= -->
+
+        <div class="topbar">
+
+            <h1 id="pageTitle">
+                Dashboard
+            </h1>
 
             <div>
 
-                <strong>Administrator</strong>
-
-                <p>Principal Office</p>
+                <i class="fas fa-user-circle"></i>
+                Admin
 
             </div>
 
         </div>
 
-    </div>
+        <!-- ================= CARDS ================= -->
 
-    <!-- ================= CARDS ================= -->
+        <div class="cards">
 
-    <div class="cards">
+            <div class="card">
 
-        <div class="card"
-        onclick="cardClick('Students')">
+                <i class="fas fa-user-graduate"></i>
 
-            <i class="fas fa-user-graduate"></i>
+                <h3 id="studentCount">
+                    0 Students
+                </h3>
 
-            <h3>Students</h3>
+            </div>
 
-            <p>546 Registered Learners</p>
+            <div class="card">
 
-        </div>
+                <i class="fas fa-chalkboard-teacher"></i>
 
-        <div class="card"
-        onclick="cardClick('Teachers')">
+                <h3 id="teacherCount">
+                    0 Teachers
+                </h3>
 
-            <i class="fas fa-chalkboard-teacher"></i>
+            </div>
 
-            <h3>Teachers</h3>
+            <div class="card">
 
-            <p>28 Active Teachers</p>
+                <i class="fas fa-calendar-check"></i>
 
-        </div>
+                <h3 id="attendanceCount">
+                    0 Attendance
+                </h3>
 
-        <div class="card"
-        onclick="cardClick('Attendance')">
-
-            <i class="fas fa-calendar-check"></i>
-
-            <h3>Attendance</h3>
-
-            <p>95% Attendance</p>
+            </div>
 
         </div>
 
-        <div class="card"
-        onclick="cardClick('Finance')">
+        <!-- ================= STUDENTS ================= -->
 
-            <i class="fas fa-money-bill-wave"></i>
+        <div class="table-box">
 
-            <h3>Finance</h3>
+            <h2>Students</h2>
 
-            <p>Fees Updated</p>
+            <table>
 
-        </div>
+                <thead>
 
-    </div>
+                    <tr>
 
-    <!-- ================= STUDENTS ================= -->
+                        <th>Name</th>
+                        <th>Grade</th>
+                        <th>Actions</th>
 
-    <div class="table-box">
+                    </tr>
 
-        <h2>Students</h2>
+                </thead>
 
-        <table>
+                <tbody id="studentTable"></tbody>
 
-            <thead>
-
-                <tr>
-
-                    <th>Name</th>
-                    <th>Grade</th>
-                    <th>Actions</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="studentTable">
-
-                <tr>
-
-                    <td>John Doe</td>
-
-                    <td>Grade 7</td>
-
-                    <td>
-
-                        <button class="action-btn edit-btn"
-                        onclick="editStudent(this)">
-                            Edit
-                        </button>
-
-                        <button class="action-btn delete-btn"
-                        onclick="deleteRow(this)">
-                            Delete
-                        </button>
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <div class="form-box">
-
-        <h2>Add Student</h2>
-
-        <div class="form-group">
-
-            <label>Student Name</label>
-
-            <input type="text"
-            id="studentName">
+            </table>
 
         </div>
 
-        <div class="form-group">
+        <div class="form-box">
 
-            <label>Grade</label>
+            <h2>Add Student</h2>
 
-            <select id="studentGrade">
+            <div class="form-group">
 
-                <option>Grade 1</option>
-                <option>Grade 2</option>
-                <option>Grade 3</option>
-                <option>Grade 4</option>
-                <option>Grade 5</option>
-                <option>Grade 6</option>
-                <option>Grade 7</option>
+                <label>Student Name</label>
 
-            </select>
+                <input type="text"
+                id="studentName">
 
-        </div>
+            </div>
 
-        <button class="submit-btn"
-        onclick="addStudent()">
+            <div class="form-group">
 
-            Add Student
+                <label>Grade</label>
 
-        </button>
+                <select id="studentGrade">
 
-    </div>
+                    <option>Grade 1</option>
+                    <option>Grade 2</option>
+                    <option>Grade 3</option>
+                    <option>Grade 4</option>
+                    <option>Grade 5</option>
+                    <option>Grade 6</option>
+                    <option>Grade 7</option>
 
-    <!-- ================= TEACHERS ================= -->
+                </select>
 
-    <div class="table-box">
+            </div>
 
-        <h2>Teachers</h2>
+            <button class="submit-btn"
+            onclick="addStudent()">
 
-        <table>
+                Add Student
 
-            <thead>
-
-                <tr>
-
-                    <th>Name</th>
-                    <th>Subject</th>
-                    <th>Actions</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="teacherTable">
-
-                <tr>
-
-                    <td>Mr Mulaudzi</td>
-
-                    <td>Mathematics</td>
-
-                    <td>
-
-                        <button class="action-btn edit-btn"
-                        onclick="editTeacher(this)">
-                            Edit
-                        </button>
-
-                        <button class="action-btn delete-btn"
-                        onclick="deleteRow(this)">
-                            Delete
-                        </button>
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <div class="form-box">
-
-        <h2>Add Teacher</h2>
-
-        <div class="form-group">
-
-            <label>Teacher Name</label>
-
-            <input type="text"
-            id="teacherName">
+            </button>
 
         </div>
 
-        <div class="form-group">
+        <!-- ================= TEACHERS ================= -->
 
-            <label>Subject</label>
+        <div class="table-box">
 
-            <input type="text"
-            id="teacherSubject">
+            <h2>Teachers</h2>
 
-        </div>
+            <table>
 
-        <button class="submit-btn"
-        onclick="addTeacher()">
+                <thead>
 
-            Add Teacher
+                    <tr>
 
-        </button>
+                        <th>Name</th>
+                        <th>Subject</th>
+                        <th>Actions</th>
 
-    </div>
+                    </tr>
 
-    <!-- ================= ATTENDANCE ================= -->
+                </thead>
 
-    <div class="table-box">
+                <tbody id="teacherTable"></tbody>
 
-        <h2>Attendance</h2>
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Student</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="attendanceTable">
-
-                <tr>
-
-                    <td>Mary Smith</td>
-
-                    <td>
-                        <span class="status present">
-                            Present
-                        </span>
-                    </td>
-
-                    <td>
-
-                        <button class="action-btn edit-btn"
-                        onclick="editAttendance(this)">
-                            Edit
-                        </button>
-
-                        <button class="action-btn delete-btn"
-                        onclick="deleteRow(this)">
-                            Delete
-                        </button>
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <div class="form-box">
-
-        <h2>Add Attendance</h2>
-
-        <div class="form-group">
-
-            <label>Student Name</label>
-
-            <input type="text"
-            id="attendanceStudent">
+            </table>
 
         </div>
 
-        <div class="form-group">
+        <div class="form-box">
 
-            <label>Status</label>
+            <h2>Add Teacher</h2>
 
-            <select id="attendanceStatus">
+            <div class="form-group">
 
-                <option>Present</option>
-                <option>Absent</option>
+                <label>Teacher Name</label>
 
-            </select>
+                <input type="text"
+                id="teacherName">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Subject</label>
+
+                <input type="text"
+                id="teacherSubject">
+
+            </div>
+
+            <button class="submit-btn"
+            onclick="addTeacher()">
+
+                Add Teacher
+
+            </button>
 
         </div>
 
-        <button class="submit-btn"
-        onclick="addAttendance()">
+        <!-- ================= ATTENDANCE ================= -->
 
-            Save Attendance
+        <div class="table-box">
 
-        </button>
+            <h2>Attendance</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Student</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="attendanceTable"></tbody>
+
+            </table>
+
+        </div>
+
+        <div class="form-box">
+
+            <h2>Add Attendance</h2>
+
+            <div class="form-group">
+
+                <label>Student Name</label>
+
+                <input type="text"
+                id="attendanceStudent">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Status</label>
+
+                <select id="attendanceStatus">
+
+                    <option>Present</option>
+                    <option>Absent</option>
+
+                </select>
+
+            </div>
+
+            <button class="submit-btn"
+            onclick="addAttendance()">
+
+                Save Attendance
+
+            </button>
+
+        </div>
 
     </div>
 
@@ -685,27 +625,96 @@ table td{
 
 <script>
 
-/* ================= MENU ================= */
+/* ================= LOGIN ================= */
 
-function openSection(section){
+function login(){
+
+    const username =
+    document.getElementById(
+        "username"
+    ).value;
+
+    const password =
+    document.getElementById(
+        "password"
+    ).value;
+
+    if(
+        username === "admin"
+        &&
+        password === "1234"
+    ){
+
+        document.getElementById(
+            "loginPage"
+        ).style.display = "none";
+
+        document.getElementById(
+            "app"
+        ).style.display = "block";
+
+        alert(
+            "Login Successful"
+        );
+
+    }
+
+    else{
+
+        alert(
+            "Invalid Login"
+        );
+
+    }
+
+}
+
+/* ================= LOGOUT ================= */
+
+function logout(){
+
+    location.reload();
+
+}
+
+/* ================= OPEN SECTION ================= */
+
+function openSection(name){
 
     document.getElementById(
         "pageTitle"
-    ).innerText = section;
+    ).innerText = name;
 
-    alert(section + " Opened");
-
-}
-
-/* ================= CARDS ================= */
-
-function cardClick(name){
-
-    alert(name + " Card Opened");
+    alert(name + " Opened");
 
 }
 
-/* ================= ADD STUDENT ================= */
+/* ================= COUNTERS ================= */
+
+let studentCounter = 0;
+let teacherCounter = 0;
+let attendanceCounter = 0;
+
+function updateCounters(){
+
+    document.getElementById(
+        "studentCount"
+    ).innerText =
+    studentCounter + " Students";
+
+    document.getElementById(
+        "teacherCount"
+    ).innerText =
+    teacherCounter + " Teachers";
+
+    document.getElementById(
+        "attendanceCount"
+    ).innerText =
+    attendanceCounter + " Attendance";
+
+}
+
+/* ================= STUDENTS ================= */
 
 function addStudent(){
 
@@ -748,7 +757,7 @@ function addStudent(){
             </button>
 
             <button class="action-btn delete-btn"
-            onclick="deleteRow(this)">
+            onclick="deleteRow(this,'student')">
                 Delete
             </button>
 
@@ -757,11 +766,13 @@ function addStudent(){
     </tr>
     `;
 
+    studentCounter++;
+
+    updateCounters();
+
     document.getElementById(
         "studentName"
     ).value = "";
-
-    alert("Student Added");
 
 }
 
@@ -786,13 +797,11 @@ function editStudent(button){
         row.cells[0].innerText =
         newName;
 
-        alert("Student Updated");
-
     }
 
 }
 
-/* ================= ADD TEACHER ================= */
+/* ================= TEACHERS ================= */
 
 function addTeacher(){
 
@@ -808,7 +817,7 @@ function addTeacher(){
 
     if(name === "" || subject === ""){
 
-        alert("Fill all teacher fields");
+        alert("Fill all fields");
 
         return;
 
@@ -835,7 +844,7 @@ function addTeacher(){
             </button>
 
             <button class="action-btn delete-btn"
-            onclick="deleteRow(this)">
+            onclick="deleteRow(this,'teacher')">
                 Delete
             </button>
 
@@ -844,6 +853,10 @@ function addTeacher(){
     </tr>
     `;
 
+    teacherCounter++;
+
+    updateCounters();
+
     document.getElementById(
         "teacherName"
     ).value = "";
@@ -851,8 +864,6 @@ function addTeacher(){
     document.getElementById(
         "teacherSubject"
     ).value = "";
-
-    alert("Teacher Added");
 
 }
 
@@ -889,13 +900,11 @@ function editTeacher(button){
         row.cells[1].innerText =
         newSubject;
 
-        alert("Teacher Updated");
-
     }
 
 }
 
-/* ================= ADD ATTENDANCE ================= */
+/* ================= ATTENDANCE ================= */
 
 function addAttendance(){
 
@@ -949,7 +958,7 @@ function addAttendance(){
             </button>
 
             <button class="action-btn delete-btn"
-            onclick="deleteRow(this)">
+            onclick="deleteRow(this,'attendance')">
                 Delete
             </button>
 
@@ -958,11 +967,13 @@ function addAttendance(){
     </tr>
     `;
 
+    attendanceCounter++;
+
+    updateCounters();
+
     document.getElementById(
         "attendanceStudent"
     ).value = "";
-
-    alert("Attendance Saved");
 
 }
 
@@ -973,21 +984,19 @@ function editAttendance(button){
     const row =
     button.parentElement.parentElement;
 
-    const currentStudent =
+    const currentName =
     row.cells[0].innerText;
 
-    const newStudent =
+    const newName =
     prompt(
         "Edit Student Name",
-        currentStudent
+        currentName
     );
 
-    if(newStudent){
+    if(newName){
 
         row.cells[0].innerText =
-        newStudent;
-
-        alert("Attendance Updated");
+        newName;
 
     }
 
@@ -995,7 +1004,7 @@ function editAttendance(button){
 
 /* ================= DELETE ================= */
 
-function deleteRow(button){
+function deleteRow(button,type){
 
     const row =
     button.parentElement.parentElement;
@@ -1004,7 +1013,25 @@ function deleteRow(button){
 
         row.remove();
 
-        alert("Deleted Successfully");
+        if(type === "student"){
+
+            studentCounter--;
+
+        }
+
+        else if(type === "teacher"){
+
+            teacherCounter--;
+
+        }
+
+        else if(type === "attendance"){
+
+            attendanceCounter--;
+
+        }
+
+        updateCounters();
 
     }
 
